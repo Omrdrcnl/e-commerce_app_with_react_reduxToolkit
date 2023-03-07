@@ -96,10 +96,10 @@ const Header = () => {
                       <a href="/category/test">LOADING</a>
                     </li>
                     <li className="has-sub">
-                      <a href="/category/test">Category</a>
+                      <a href="/category">Category</a>
                       <ul>
                         <li>
-                          <a>sdasd</a>
+                          <a>Kategoriler</a>
                         </li>
                       </ul>
                     </li>
