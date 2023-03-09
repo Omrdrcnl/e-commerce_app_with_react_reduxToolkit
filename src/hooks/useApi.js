@@ -6,8 +6,11 @@ const useApi = () => {
   axios.defaults.baseURL = baseApiUrl;
 
   const token = localStorage.getItem("token");
+
+  axios.defaults.headers.common[`accept`] = `application/json`;
+
   if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer `;
+    axios.defaults.headers.common["Authorization"] = token;
   }
 
   return axios;

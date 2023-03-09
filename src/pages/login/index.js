@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Breadcrumb from "../../compenents/breadcrumb";
 import useApi from "../../hooks/useApi";
+import { set_token } from "../../redux/authSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const breadcrumbs = [
     {
@@ -21,14 +24,20 @@ function Login() {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    alert("form submit oldu");
+    // alert("form submit oldu");
 
     const postData = { email, password };
 
     api
       .post("shop/authentication-token", postData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        dispatch(
+          set_token({
+            token: res.data.token,
+          })
+        );
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log("<< Login post hatası" + err);
