@@ -1,4 +1,3 @@
-import { Carousel } from "react-responsive-carousel";
 import Header from "./compenents/header";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Footer from "./compenents/footer";
@@ -37,7 +36,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/category" element={<Category />} />
+          <Route path="/category/:taxon_code" element={<Category />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />

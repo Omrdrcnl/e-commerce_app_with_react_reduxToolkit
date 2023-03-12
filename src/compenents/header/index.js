@@ -106,9 +106,6 @@ const Header = () => {
                     <li className="active">
                       <a href="/">Home</a>
                     </li>
-                    <li className="">
-                      <a href="/category/test">LOADING</a>
-                    </li>
                     <li className="has-sub">
                       <a href="/category">Category</a>
                       <ul>
