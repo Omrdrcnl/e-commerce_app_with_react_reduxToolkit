@@ -2,10 +2,10 @@ import ProductItem from "../product-item";
 
 function ProductList(props) {
   console.log(">> PRODUCT LIST PROPS", props);
-  const productCmponents = [];
+  const productComponents = [];
 
   props.item.map((item, index) => {
-    productCmponents.push(<ProductItem item={item} key={index} />);
+    productComponents.push(<ProductItem item={item} key={index} />);
   });
 
   return (
@@ -24,7 +24,7 @@ function ProductList(props) {
           </form>
         </div>
       </div>
-      {productCmponents}
+      {productComponents}
       <div className="row"></div>
       <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">

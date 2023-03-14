@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useApi from "./hooks/useApi";
 import { set_categories } from "./redux/categorySlice";
 import Cart from "./pages/cart";
+import { setTokenValue, updatedFullCart } from "./redux/cartSlice";
 
 function App() {
   const categoryState = useSelector((state) => state.categoryState);
@@ -29,11 +30,38 @@ function App() {
         console.log("<<< taxon api", err);
       });
   }
+  const cartState = useSelector((state) => state.cartState);
+
+  if (!cartState.tokenValue) {
+    const postData = {
+      localeCode: "en_US",
+    };
+    api
+      .post("shop/orders", postData)
+      .then((res) => {
+        dispatch(
+          setTokenValue({
+            tokenValue: res.data.tokenValue,
+          })
+        );
+        console.log(">>  cart res", res);
+      })
+      .catch((err) => {
+        console.log(">>  cart err", err);
+      });
+  } else if (!cartState.id) {
+    api.get(`shop/orders/${cartState.tokenValue}`)
+      .then((res) => {
+        dispatch(updatedFullCart(res.data));
+        console.log(">>  cart res", res);
+      })
+      .catch((err) => { console.log(">>  cart err", err) });
+  }
 
   return (
     <div className="">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:taxon_code" element={<Category />} />
@@ -41,8 +69,8 @@ function App() {
           <Route path="/auth/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

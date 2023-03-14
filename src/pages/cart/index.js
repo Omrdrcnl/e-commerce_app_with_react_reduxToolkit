@@ -1,4 +1,15 @@
+import { useSelector } from "react-redux";
+import useApi from ".././/../hooks/useApi";
+import CartTableItem from "./components/cart-table-item";
+
 const Cart = () => {
+  const cartState = useSelector((state) => state.cartState);
+  const cartTableItems = [];
+
+  cartState.items.map((item, index) => {
+    cartTableItems.push(<CartTableItem {...item} index={index} />);
+  });
+
   return (
     <div className="space-medium">
       <div className="container">
@@ -29,83 +40,13 @@ const Cart = () => {
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <a href="#">
-                              <img src="/images/cart_product_1.png" alt="" />
-                            </a>
-                            <span>
-                              <a href="#">Google Pixle</a>
-                            </span>
-                          </td>
-                          <td>$1100</td>
-                          <td>
-                            <div className="product-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="number"
-                                  className="input-text qty text"
-                                  step="1"
-                                  min="1"
-                                  max="6"
-                                  name="quantity"
-                                  defaultValue="1"
-                                  title="Qty"
-                                  size="4"
-                                  pattern="[0-9]*"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                          <td>$1100.00</td>
-                          <th scope="row">
-                            <a href="#" className="btn-close">
-                              <i className="fa fa-times-circle-o"></i>
-                            </a>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>
-                            <a href="#">
-                              <img src="/images/cart_product_2.png" alt="" />
-                            </a>
-                            <span>
-                              <a href="#">Apple iPhone 6S </a>
-                            </span>
-                          </td>
-                          <td>$1300</td>
-                          <td>
-                            <div className="product-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="number"
-                                  className="input-text qty text "
-                                  step="1"
-                                  min="1"
-                                  max="6"
-                                  name="quantity"
-                                  defaultValue="1"
-                                  title="Qty"
-                                  size="4"
-                                  pattern="[0-9]*"
-                                />
-                              </div>
-                            </div>
-                          </td>
-                          <td>$1300.00</td>
-                          <th scope="row">
-                            <a href="#" className="btn-close">
-                              <i className="fa fa-times-circle-o"></i>
-                            </a>
-                          </th>
-                        </tr>
-                      </tbody>
+                      <tbody>{cartTableItems}</tbody>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
+
             <a href="#" className="btn-link">
               <i className="fa fa-angle-left"></i> back to shopping
             </a>
@@ -153,30 +94,6 @@ const Cart = () => {
                     Proceed To Checkout
                   </button>
                 </div>
-              </div>
-            </div>
-            <div className="box mb30">
-              <div className="box-head">
-                <h3 className="head-title">Coupons &amp; Offers</h3>
-              </div>
-              <div className="box-body">
-                <form>
-                  <div className="coupon-form">
-                    <input
-                      type="text"
-                      name="coupon_code"
-                      className="form-control"
-                      id="coupon_code"
-                      placeholder="Coupon code"
-                    />
-                    <input
-                      type="submit"
-                      className="btn btn-primary btn-block"
-                      name="apply_coupon"
-                      value="Apply coupon"
-                    />
-                  </div>
-                </form>
               </div>
             </div>
           </div>

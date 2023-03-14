@@ -4,6 +4,7 @@ import { remove_token } from "../../redux/authSlice";
 const Header = () => {
   const authState = useSelector((state) => state.authState);
   const categoryState = useSelector((state) => state.categoryState);
+  const cartState = useSelector((state) => state.cartState);
 
   const dispatch = useDispatch();
   return (
@@ -88,7 +89,7 @@ const Header = () => {
                   <li>
                     <a href="/cart" className="title">
                       <i className="fa fa-shopping-cart"></i>
-                      <sup className="cart-quantity">1</sup>
+                      <sup className="cart-quantity">2</sup>
                     </a>
                   </li>
                 </ul>

@@ -15,7 +15,10 @@ export const authSlice = createSlice({
     },
     remove_token: (state, action) => {
       localStorage.removeItem("token");
+      localStorage.removeItem("cartTokenValue");
+
       state.token = null;
+      state.cartTokenValue = null;
     },
   },
 });
