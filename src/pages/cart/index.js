@@ -4,6 +4,18 @@ import CartTableItem from "./components/cart-table-item";
 
 const Cart = () => {
   const cartState = useSelector((state) => state.cartState);
+
+  if (cartState.id === null) {
+    return <div className="space-medium">
+      <div className="container">
+        <div className="row">
+          <h1 className="text-center">Loading..</h1>
+        </div>
+      </div>
+    </div>
+  }
+
+
   const cartTableItems = [];
 
   cartState.items.map((item, index) => {
@@ -63,16 +75,38 @@ const Cart = () => {
                       <tbody>
                         <tr>
                           <th>
-                            <span>Price (2 items)</span>
+                            <span>Price ({cartState.items.length} items)</span>
                           </th>
-                          <td>$2400</td>
+                          <td>
+                            {cartState.itemsTotal}
+                            {/* // {cartState.items.reduce((currentTotal, item) => currentTotal + item.subtotal, 0)} */}
+                            &nbsp;
+                            {cartState.currencyCode}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>
+                            <span>Tax Total</span>
+                          </th>
+                          <td>
+                            <strong className="text-green">
+                              {cartState.taxTotal}
+                              &nbsp;
+                              {cartState.currencyCode}
+                            </strong>
+                          </td>
                         </tr>
                         <tr>
                           <th>
                             <span>Delivery Charges</span>
                           </th>
                           <td>
-                            <strong className="text-green">Free</strong>
+                            {cartState.shippingTotal == 0 ?
+                              <strong className="text-green">Free</strong> :
+                              <>{cartState.shippingTotal}
+                                &nbsp;
+                                {cartState.currencyCode}</>}
+
                           </td>
                         </tr>
                       </tbody>
@@ -80,11 +114,13 @@ const Cart = () => {
                         <tr>
                           <th>
                             <span className="mb0" style={{ fontWeight: 700 }}>
-                              Amount Payable
+                              Total Amount Pay
                             </span>
                           </th>
                           <td style={{ fontWeight: 700, color: "#1c1e1e" }}>
-                            $2400
+                            {cartState.total}
+                            &nbsp;
+                            {cartState.currencyCode}
                           </td>
                         </tr>
                       </tbody>

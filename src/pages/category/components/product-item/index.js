@@ -5,8 +5,8 @@ import { updatedFullCart } from "../../../../redux/cartSlice";
 const ProductItem = (props) => {
   const api = useApi();
   const cartState = useSelector((state) => state.cartState);
-  console.log("cartstate", cartState);
-  console.log(">> PRODUCT ITEM PROPS", props);
+  // console.log("cartstate", cartState);
+  // console.log(">> PRODUCT ITEM PROPS", props);
   const dispatch = useDispatch();
 
   const onAddToButtonClick = (event) => {
@@ -15,7 +15,7 @@ const ProductItem = (props) => {
       "/api/v2/shop/product-variants/",
       ""
     );
-    console.log("productVariant", productVariant);
+    // console.log("productVariant", productVariant);
 
     const postData = {
       "productVariant": productVariant,
@@ -24,7 +24,7 @@ const ProductItem = (props) => {
     api
       .post(`shop/orders/${cartState.tokenValue}/items`, postData)
       .then((res) => {
-
+        dispatch(updatedFullCart(res.data));
         console.log("onAddtObUTTONclıck res", res);
       })
       .catch((err) => {

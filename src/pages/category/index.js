@@ -16,7 +16,7 @@ function Category() {
     urlQueryData["order[code]"] = "asc";
     urlQueryData["order[createdAt]"] = "asc";
 
-    console.log(">>> urlQueryData", urlQueryData);
+    // console.log(">>> urlQueryData", urlQueryData);
 
     api
       .get("shop/products", { params: urlQueryData })
@@ -24,7 +24,7 @@ function Category() {
         console.log(">>  PRODUCT DATA", res.data);
         setProducts(res.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
 
   const breadcrumbs = [

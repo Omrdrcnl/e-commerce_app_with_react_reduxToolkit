@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
       state.cartState = action.payload.cartState;
     },
     updatedFullCart: (state, action) => {
-      return state.items = action.payload;
+      return action.payload;
     }
   },
 });

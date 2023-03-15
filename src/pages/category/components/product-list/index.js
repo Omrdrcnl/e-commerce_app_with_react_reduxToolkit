@@ -1,7 +1,7 @@
 import ProductItem from "../product-item";
 
 function ProductList(props) {
-  console.log(">> PRODUCT LIST PROPS", props);
+  // console.log(">> PRODUCT LIST PROPS", props);
   const productComponents = [];
 
   props.item.map((item, index) => {

@@ -5,6 +5,7 @@ const Header = () => {
   const authState = useSelector((state) => state.authState);
   const categoryState = useSelector((state) => state.categoryState);
   const cartState = useSelector((state) => state.cartState);
+  // console.log("header cartstate", cartState);
 
   const dispatch = useDispatch();
   return (
@@ -89,7 +90,7 @@ const Header = () => {
                   <li>
                     <a href="/cart" className="title">
                       <i className="fa fa-shopping-cart"></i>
-                      <sup className="cart-quantity">2</sup>
+                      <sup className="cart-quantity">{cartState.items.length}</sup>
                     </a>
                   </li>
                 </ul>
