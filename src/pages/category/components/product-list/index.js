@@ -25,34 +25,6 @@ function ProductList(props) {
         </div>
       </div>
       {productComponents}
-      <div className="row"></div>
-      <div className="row">
-        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div className="st-pagination">
-            <ul className="pagination">
-              <li>
-                <a href="#" aria-label="previous">
-                  <span aria-hidden="true">Previous</span>
-                </a>
-              </li>
-              <li className="active">
-                <a href="#">1</a>
-              </li>
-              <li>
-                <a href="#">2</a>
-              </li>
-              <li>
-                <a href="#">3</a>
-              </li>
-              <li>
-                <a href="#" aria-label="Next">
-                  <span aria-hidden="true">Next</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

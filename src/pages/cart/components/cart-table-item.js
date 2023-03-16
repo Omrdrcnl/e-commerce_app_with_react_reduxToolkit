@@ -1,17 +1,25 @@
-import { useDispatch, useSelector } from "react-redux";
-import useApi from "../../../hooks/useApi";
 import { updatedFullCart } from "C:/Users/ASUS/OneDrive/Masaüstü/React/e-commerce_react_app_reduxtoolkit/src/redux/cartSlice"
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 
-const CartTableItem = (props) => {
+import useApi from "../../../hooks/useApi";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+
+const CartTableItem = (props, product) => {
 
   console.log(">>>  CartTableItem props", props);
+
   const cartState = useSelector((state) => state.cartState);
+
   console.log(">>>  CartTableItem cartState", cartState);
+
   const api = useApi();
   const dispatch = useDispatch();
+  const params = useParams();
+  const [images, setImages] = useState(null);
+
   const onQuantityChange = (e) => {
     const patchData = {
       "quantity": parseInt(e.target.value),
@@ -20,17 +28,15 @@ const CartTableItem = (props) => {
       patchData,
       { headers: { 'Content-Type': 'application/merge-patch+json' }, })
       //apiden gelen patch headersi farklı oldugu için burada headers seklinde apiden gelen tipe göre headers belirledik
-      .then((res) => {
-        dispatch(updatedFullCart(res.data));
-        // console.log(">>>  onQuantityChangePatch res", res);
+      .then((patchRes) => {
+        dispatch(updatedFullCart(patchRes.data));
+        //console.log(">>>  onQuantityChangePatch res", patchRes);
       })
       .catch((err) => {
         console.log(">>>  onQuantityChangePatch err", err);
       })
     // console.log(">> onQuantityChange", e.target.value);
   };
-  // const [products, setProducts] = useState([]);
-  // const params = useParams();
   // useEffect(() => {
   //   const urlQueryData = {};
   //   urlQueryData["productTaxons.taxon.code"] = params.taxon_code;
@@ -43,16 +49,26 @@ const CartTableItem = (props) => {
   //     .get("shop/products", { params: urlQueryData })
   //     .then((res) => {
   //       console.log(">>  PRODUCT DATA", res.data);
-  //       setProducts(res.data);
+  //       const getData = {
+  //         "id": res.data[0].id,
+  //         "type": "main",
+  //         "path": "https://ecommerce-api.udemig.dev/media/cache/resolve/sylius_small/02/4d/ddaa2e3ddb435ee0474257edcd56.jpg"
+  //       }
+  //       api.get(`shop/product-images/${res.data[0].id}`, getData)
+  //         .then((res) => {
+  //           setImages(res)
+  //           // console.log("res images dizi", images.data.path)
+  //           // console.log(">>> images get res", res)
+  //         })
+  //         .catch((error) => {
+  //           console.log(">> images get error", error)
+  //         })
   //     })
   //     .catch((err) => { });
   // }, []);
 
-  // console.log(">>>  CartTableItem products", products);
-  // const productComponents = []
-  // products.items.map((item, index) => {
 
-  // })
+
   const deleteCartItem = () => {
     api.delete(`shop/orders/${cartState.tokenValue}/items/${props.id}`)
       .then((res) => {
@@ -60,7 +76,7 @@ const CartTableItem = (props) => {
           .get(`shop/orders/${cartState.tokenValue}`,)
           .then((res) => {
             dispatch(updatedFullCart(res.data));
-            console.log("delete cart uptadeted res", res);
+            // console.log("delete cart uptadeted res", res);
           })
           .catch((err) => {
             console.log("delete cart uptadeted err", err);
@@ -74,11 +90,17 @@ const CartTableItem = (props) => {
   return (
     <tr>
       <td>
-        <a href="#">
-          <img src="/images/cart_product_1.png" alt="" />
-        </a>
+        {/* <img src="/images/google_logo.png" alt="" /> */}
+
+        {/* {images.data.path ? (
+          <> <a href="#">
+            <img style={{ height: "60px" }} src={"https://ecommerce-api.udemig.dev" + images.data.path} alt="" />
+          </a></>) : (<>  <a href="#">
+            <img src={"https://ecommerce-api.udemig.dev"} alt="" />
+          </a></>)} */}
+
         <span>
-          <a href="#">{props.productName}</a>
+          <Link href="#">{props.productName}</Link>
         </span>
       </td>
       <td>
@@ -108,7 +130,7 @@ const CartTableItem = (props) => {
         &nbsp;
         {cartState.currencyCode}</td>
       <th scope="row">
-        <button onClick={deleteCartItem} className="btn-light btn btn-close">
+        <button onClick={deleteCartItem} className="btn-light btn-close">
           <i className="fa fa-times-circle-o"></i>
         </button>
       </th>

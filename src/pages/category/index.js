@@ -33,7 +33,7 @@ function Category() {
       href: "/",
     },
     {
-      title: "Category",
+      title: "/Category/",
       href: "/category",
     },
     {

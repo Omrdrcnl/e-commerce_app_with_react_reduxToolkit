@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { remove_token } from "../../redux/authSlice";
+
 
 const Header = () => {
   const authState = useSelector((state) => state.authState);
@@ -75,23 +77,23 @@ const Header = () => {
                   ) : (
                     <>
                       <li>
-                        <a href="/auth/login" className="title hidden-xs">
+                        <Link to="/auth/login" relative="path" className="title hidden-xs">
                           Login
-                        </a>
+                        </Link>
                       </li>
                       <li className="hidden-xs">|</li>
                       <li>
-                        <a href="/auth/register" className="title hidden-xs">
+                        <Link to="/auth/register" relative="path" className="title hidden-xs">
                           Register
-                        </a>
+                        </Link>
                       </li>
                     </>
                   )}
                   <li>
-                    <a href="/cart" className="title">
+                    <Link to="/cart" className="title">
                       <i className="fa fa-shopping-cart"></i>
                       <sup className="cart-quantity">{cartState.items.length}</sup>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -106,15 +108,15 @@ const Header = () => {
                 <div id="navigation">
                   <ul>
                     <li className="active">
-                      <a href="/">Home</a>
+                      <Link to="/">Home</Link>
                     </li>
                     <li className="has-sub">
-                      <a href="/category">Category</a>
+                      <Link relative="path" to="category/">Category</Link>
                       <ul>
                         {categoryState.categories?.map((item, index) => {
                           return (
                             <li key={index}>
-                              <a href={"category/" + item.code}>{item.name}</a>
+                              <a relative="path" href={"http://localhost:3000/category/" + item.code}>{item.name}</a>
                             </li>
                           );
                         })}

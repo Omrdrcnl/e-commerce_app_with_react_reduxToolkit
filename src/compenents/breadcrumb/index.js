@@ -7,10 +7,9 @@ function Breadcrumb(props) {
             <div className="page-breadcrumb">
               <ol className="breadcrumb">
                 <li>
-                  <a href="">Home</a>
-                </li>
-                <li>
-                  <a href="">page</a>
+                  {props.items.map((item, index) =>
+                    <a href={item.href} key={index} >{item.title} </a>
+                  )}
                 </li>
               </ol>
             </div>

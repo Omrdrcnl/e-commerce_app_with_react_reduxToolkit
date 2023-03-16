@@ -25,12 +25,12 @@ const ProductItem = (props) => {
       .post(`shop/orders/${cartState.tokenValue}/items`, postData)
       .then((res) => {
         dispatch(updatedFullCart(res.data));
-        console.log("onAddtObUTTONclıck res", res);
+        console.log("onAddtoButtonClıck res", res);
       })
       .catch((err) => {
-        console.log("onAddtObUTTONclıck err", err);
+        console.log("onAddtoButtonClıck err", err);
       });
-    // console.log(">> product details", props.item);
+    console.log(">> product details", props.item);
   };
 
   return (
